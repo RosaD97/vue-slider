@@ -71,6 +71,9 @@
 .next {
     bottom: 0;
 }
+[v-cloak]{
+    display: none;
+}
 
 /*
 EXTRA: in questo esempio gli accordion vengono creati

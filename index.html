@@ -11,10 +11,10 @@
 
 <body>
 
-    <div id="app">
+    <div id="app" v-cloak>
 
         <div class="container">
-            <div class="slider-wrapper" tabindex="0">
+            <div @mouseenter="stopPlay" @mouseleave="startPlay" class="slider-wrapper" tabindex="0">
 
                 <div class="item">
                     <img :src="movies[activeImg].image" alt="Spiderman" />
@@ -26,12 +26,12 @@
                 </div>
 
                 <div class="thumbs">
-                    <div @click="prevImg" class="prev"></div>
-                    <div  @click="nextImg" class="next"></div>
+                    <div @click="prev" class="prev"></div>
+                    <div  @click="next" class="next"></div>
 
-                    <div @click="activeThumb(index)" v-for="(img, index) in movies" class="thumb" :class="{ active: isActive }">
-                        <img :src="img.image" alt="immagini">
-                    </div>
+                    <div @click="activeThumb(index)" v-for="(img, index) in movies" class="thumb" :class="{ active: index === activeImg }">
+                        <img :src="img.image" alt="immagini"   >
+                    </div> 
                 </div>
 
             </div>

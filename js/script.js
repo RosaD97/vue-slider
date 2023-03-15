@@ -31,6 +31,8 @@ createApp({
         return {
             isActive: false,
             activeImg: 0,
+            timeOut: 2,
+            iterval: null,
             movies: [
                 {
                     image: 'img/01.webp',
@@ -57,13 +59,13 @@ createApp({
         };
     },
     methods: {
-        nextImg() {
+        next() {
             this.activeImg++;
             if (this.activeImg > this.movies.length - 1) {
                 this.activeImg = 0;
             }
         },
-        prevImg() {
+        prev() {
             this.activeImg--;
             if (this.activeImg < 0) {
                 this.activeImg = this.movies.length - 1;
@@ -71,7 +73,26 @@ createApp({
         },
         activeThumb(index) {
             this.activeImg = index;
-            this.isActive = true
-        }
-    }
+        },
+        autoplay() {
+            this.activeImg++;
+            if (this.activeImg > this.movies.length - 1) {
+                this.activeImg = 0;
+            }
+        },
+        stopPlay(){
+            clearInterval(this.iterval);
+            console.log('ciso')
+        },
+        startPlay(){
+            this.iterval = setInterval(() => {
+                this.autoplay();
+            }, this.timeOut * 1000);
+        },
+        mounted() {
+            this.startPlay();
+    },
+    },
 }).mount('#app');
+
+
